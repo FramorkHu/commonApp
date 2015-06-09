@@ -26,6 +26,23 @@
             <version>2.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.8</version>
+        </dependency>
     </dependencies>
 
 
@@ -39,16 +56,19 @@
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <prot>9090</prot>
+                            <port>9090</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
+                    <stopPort>9996</stopPort>
+                    <stopKey>jetty</stopKey>
 
                 </configuration>
             </plugin>
+
         </plugins>
 
         <finalName>commonapp-web</finalName>
