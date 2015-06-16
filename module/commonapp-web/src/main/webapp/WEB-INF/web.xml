@@ -31,13 +31,9 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
+    <!--用于加载 contextConfigLocation 上下文配置文件 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
     <!--定义一个servlet-->
