@@ -14,6 +14,12 @@
     <!--使用  springMvc 注解扫描-->
     <context:component-scan base-package="com.myorg.commonapp.controller"/>
 
+    <!-- 对静态资源文件访问需要添加 annotation-driven ?-->
+    <mvc:annotation-driven />
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+
     <!-- 配置 freemarker 视图解析器-->
     <bean id="freeMarkerViewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
