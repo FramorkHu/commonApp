@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by huyan on 2015/6/9.
  */
 @Controller
-@RequestMapping("/etds")
+@RequestMapping("/")
 public class LoginController {
 
     private static final String PREFIX = "/";
