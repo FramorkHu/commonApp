@@ -5,6 +5,29 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+       <!-- 配置数据源-->
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+              <property name="driverClass" value="#{jdbcProps['datasource.driverClassName']}"/>
+              <property name="jdbcUrl" value="#{jdbcProps['datasource.url']}"/>
+              <property name="user" value="#{jdbcProps['datasource.username']}"/>
+              <property name="password" value="#{jdbcProps['datasource.password']}"/>
+       </bean>
 
+       <!-- 使用jdbcTemplate操作数据-->
+       <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+              <constructor-arg ref="dataSource"/>
+       </bean>
 
+       <!--使用mybatis-->
+       <bean id="sqlSessionFactoryDataCenter" class="org.mybatis.spring.SqlSessionFactoryBean">
+              <property name="dataSource" ref="dataSource"/>
+              <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+              <property name="mapperLocations">
+                     <list>
+                            <value>classpath*:mybatis/sqlmap/**/*.xml</value>
+                            <value>classpath*:mybatis/sqlmap/**/ext/*.xml</value>
+                     </list>
+              </property>
+
+       </bean>
 </beans>
