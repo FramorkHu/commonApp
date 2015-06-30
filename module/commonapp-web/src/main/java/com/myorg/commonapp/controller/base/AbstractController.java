@@ -1,4 +1,4 @@
-package com.myorg.commonapp.controller;
+package com.myorg.commonapp.controller.base;
 
 import com.myorg.commonapp.utils.JsonUtil;
 
