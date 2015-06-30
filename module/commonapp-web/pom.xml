@@ -8,9 +8,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commonapp-web</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <name>commonapp-web Maven Webapp</name>
+    <modules>
+        <module>../commonapp-service</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -56,6 +59,11 @@
             <version>4.0.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.myorg.commonapp</groupId>
+            <artifactId>commonapp-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 
