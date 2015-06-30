@@ -12,13 +12,12 @@
 
 
     <!--使用  springMvc 注解扫描-->
+    <mvc:annotation-driven />
+
     <context:component-scan base-package="com.myorg.commonapp.controller"/>
 
-    <!-- 对静态资源文件访问需要添加 annotation-driven ?-->
-    <mvc:annotation-driven />
     <!-- 对静态资源文件的访问 -->
-    <mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
-    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- 配置 freemarker 视图解析器-->
     <bean id="freeMarkerViewResolver"
@@ -32,9 +31,22 @@
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="2"/>
         <property name="requestContextAttribute" value="rc"/>
-
     </bean>
 
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+            </props>
+        </property>
+    </bean>
 
 
     <!-- 配置 spring 文件上传-->

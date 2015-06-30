@@ -13,7 +13,7 @@ public class LoginController extends AbstractController{
 
     private static final String PREFIX = "/";
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String loginPage(Model model){
         return PREFIX + "login";
     }

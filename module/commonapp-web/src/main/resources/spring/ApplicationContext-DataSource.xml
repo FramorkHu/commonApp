@@ -19,7 +19,7 @@
        </bean>
 
        <!--使用mybatis-->
-       <bean id="sqlSessionFactoryDataCenter" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <!--<bean id="sqlSessionFactoryDataCenter" class="org.mybatis.spring.SqlSessionFactoryBean">
               <property name="dataSource" ref="dataSource"/>
               <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
               <property name="mapperLocations">
@@ -29,5 +29,5 @@
                      </list>
               </property>
 
-       </bean>
+       </bean>-->
 </beans>
