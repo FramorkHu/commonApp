@@ -2,9 +2,10 @@ package test.myorg.commonapp.controller;
 
 import com.myorg.commonapp.core.dao.UserInfoDao;
 import com.myorg.commonapp.core.po.UserInfo;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class LoginControllerTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginControllerTest.class);
     private ApplicationContext context;
     @Before
     public void init(){
@@ -27,7 +29,8 @@ public class LoginControllerTest {
         UserInfo userInfo =
                 userInfoDao.getUserInfo();
         List<Object> datas = userInfoDao.getData();
-        System.out.println(userInfo.getUsername());
+        LOGGER.info(userInfo.getUsername());
+        LOGGER.error("error");
 
     }
 }
