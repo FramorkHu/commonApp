@@ -12,6 +12,7 @@
         <module>module/commonapp-web</module>
         <module>module/commonapp-core</module>
         <module>module/commonapp-service</module>
+        <module>module/commonapp-util</module>
     </modules>
 
     <properties>

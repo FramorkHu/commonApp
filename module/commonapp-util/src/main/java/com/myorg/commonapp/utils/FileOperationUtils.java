@@ -95,7 +95,7 @@ public class FileOperationUtils {
      * 拷贝文件
      * @param sourceFile 源文件
      * @param targetFile 目标文件
-     * @throws IOException
+     * @throws java.io.IOException
      */
     public static boolean copyFile(File sourceFile, File targetFile) throws IOException{
 
@@ -131,7 +131,7 @@ public class FileOperationUtils {
      * 复制文件夹
      * @param sourceDir 原始文件夹
      * @param targetDir 目标文件夹
-     * @throws IOException
+     * @throws java.io.IOException
      */
     public static void copyDirectiory(String sourceDir, String targetDir) throws IOException {
 
