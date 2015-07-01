@@ -1,11 +1,11 @@
 package com.myorg.commonapp.utils;
 
 
-import com.mysql.jdbc.StringUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
@@ -52,7 +52,7 @@ public class JsonUtil {
      * List<MyBean> beanList = binder.getMapper().readValue(listString, new TypeReference<List<MyBean>>() {});
      */
     public <T> T fromJson(String jsonString, Class<T> clazz) {
-        if (StringUtils.isNullOrEmpty(jsonString)) {
+        if (StringUtils.isEmpty(jsonString)) {
             return null;
         }
         try {
@@ -63,7 +63,7 @@ public class JsonUtil {
     }
 
     public Object fromJson(String jsonString, TypeReference clazz) {
-        if (StringUtils.isNullOrEmpty(jsonString)) {
+        if (StringUtils.isEmpty(jsonString)) {
             return null;
         }
         try {

@@ -38,4 +38,5 @@
         <property name="basePackage" value="com.myorg.commonapp.core.mapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
 </beans>
