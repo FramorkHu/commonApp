@@ -20,6 +20,7 @@ public class AbstractController {
     public static final String UPDATE = "update";
     public static final String DELETE = "delete";
     public static final String MSG = "msg";
+    public static final String ERROR_MSG = "errorMsg";
     public static final String PAGER = "pager";
     public static final String TIP = "tip";
     public static final Integer DEFAULT_PAGE_SIZE = 20;
