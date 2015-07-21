@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myorg.commonapp.core.mapper.ext.AuthoritiesMapperExt" >
+
+    <resultMap id="BaseResultMap" type="com.myorg.commonapp.bean.po.Authorities">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="authorities_name" jdbcType="VARCHAR" property="authoritiesName" />
+        <result column="authorities_desc" jdbcType="VARCHAR" property="authoritiesDesc" />
+        <result column="enabled" jdbcType="INTEGER" property="enabled" />
+        <result column="is_system" jdbcType="INTEGER" property="isSystem" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, authorities_name, authorities_desc, enabled, is_system
+    </sql>
+
+    <select id="getAuthoritiesByUser" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from authorities
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+</mapper>

@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="adminUserInfoService" class="com.myorg.commonapp.service.impl.AdminUserInfoServiceImpl"/>
+    <bean id="userInfoService" class="com.myorg.commonapp.service.impl.UserInfoServiceImpl"/>
 
 </beans>

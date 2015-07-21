@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="userInfoDao" class="com.myorg.commonapp.core.dao.impl.AdminUserInfoDaoImpl"/>
+    <bean id="userInfoDao" class="com.myorg.commonapp.core.dao.impl.UserInfoDaoImpl"/>
 
+    <bean id="authoritiesDao" class="com.myorg.commonapp.core.dao.impl.AuthoritiesDaoImpl"/>
 </beans>

@@ -1,7 +1,7 @@
 package test.myorg.commonapp.controller;
 
-import com.myorg.commonapp.core.dao.AdminUserInfoDao;
-import com.myorg.commonapp.bean.po.AdminUserInfo;
+/*import com.myorg.commonapp.core.dao.AdminUserInfoDao;
+import com.myorg.commonapp.bean.po.AdminUserInfo;*/
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -22,13 +22,13 @@ public class LoginControllerTest {
     }
     @Test
     public void testUserInfo(){
-        AdminUserInfoDao adminUserInfoDao =
+        /*AdminUserInfoDao adminUserInfoDao =
                 (AdminUserInfoDao)context.getBean("userInfoDao");
         AdminUserInfo userInfo1 =
                 adminUserInfoDao.getAdminUserInfoByName("asd");
         AdminUserInfo userInfo =
                 adminUserInfoDao.getAdminUserInfo("admin","admin@123");
         LOGGER.info("yes");
-        LOGGER.error("error");
+        LOGGER.error("error");*/
     }
 }

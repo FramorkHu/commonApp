@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myorg.commonapp.core.mapper.ext.AdminUserInfoMapperExt" >
-
-    <select id="getAdminUserInfo" parameterType="string" resultType="AdminUserInfo">
-
-        select * from admin_user_info;
-    </select>
-</mapper>

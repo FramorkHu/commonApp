@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <beans:description> springSecurity 安全配置 </beans:description>
+
+    <http auto-config="true" access-denied-page="/common/403.jsp">
+
+        <form-login login-page="/admin/login"
+                    authentication-failure-url="/admin/login?login_error"
+                    default-target-url="/admin/index"/>
+
+        <logout logout-success-url="/admin/login?logoutSuccess"/>
+        <session-management>
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+
+        <custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+
+    </http>
+
+    <!--验证配置，认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可-->
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailSecurityService">
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- 一个自定义的权限filter，必须包含
+    authenticationManager,accessDecisionManager,securityMetadataSource三个属性，
+    我们的所有控制将在这三个类中实现，解释详见具体配置  -->
+    <beans:bean class="com.myorg.commonapp.security.BaseFilterSecurityInterceptor"
+                id="securityFilter">
+        <beans:property name="securityMetadataSource" ref="baseSecurityMetadataSource"/>
+        <beans:property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+    </beans:bean>
+
+    <beans:bean class="com.myorg.commonapp.security.UserDetailSecurityService"
+                id="userDetailSecurityService" />
+
+    <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+    <beans:bean class="com.myorg.commonapp.security.BaseInvocationSecurityMetadataSourceService"
+                id="baseSecurityMetadataSource"
+                init-method="loadResourceDefine"/>
+
+    <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+    <beans:bean class="com.myorg.commonapp.security.SecurityAccessDecisionManager"
+                id="accessDecisionManager"/>
+
+</beans:beans>

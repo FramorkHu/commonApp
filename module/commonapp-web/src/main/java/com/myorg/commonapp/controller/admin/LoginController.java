@@ -1,8 +1,8 @@
 package com.myorg.commonapp.controller.admin;
 
+import com.myorg.commonapp.bean.po.UserInfo;
 import com.myorg.commonapp.controller.base.AbstractController;
-import com.myorg.commonapp.bean.po.AdminUserInfo;
-import com.myorg.commonapp.service.AdminUserInfoService;
+import com.myorg.commonapp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class LoginController extends AbstractController {
     private static final String PREFIX = "admin/";
 
     @Autowired
-    private AdminUserInfoService adminUserInfoService;
+    private UserInfoService userInfoService;
 
     @RequestMapping(value = {"/login", "relogin"}, method = GET)
     public String loginPage(){
@@ -35,12 +35,12 @@ public class LoginController extends AbstractController {
     public String login(Model model, String userName, String password,
                         HttpServletRequest request){
 
-        AdminUserInfo adminUserInfo =
-                adminUserInfoService.getAdminUserInfo(userName, password);
+        UserInfo userInfo =
+                userInfoService.getUserInfo(userName, password);
 
-        if (adminUserInfo != null){
+        if (userInfo != null){
             HttpSession session = request.getSession();
-            session.setAttribute("adminUser", adminUserInfo);
+            session.setAttribute("adminUser", userInfo);
             return redirect("admin/index");
         } else {
             model.addAttribute(ERROR_MSG, "用户名或密码错误，请重新输入");
