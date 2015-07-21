@@ -10,19 +10,18 @@
         <result column="is_system" jdbcType="INTEGER" property="isSystem" />
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id, authorities_name, authorities_desc, enabled, is_system
-    </sql>
-
     <select id="getAuthoritiesByUser" parameterType="int" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from authorities
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+        SELECT
+        a.id, a.authorities_name, a.authorities_desc, a.enabled, a.is_system
+        FROM
+            user_info ui
+        JOIN
+            user_role ur ON ui.`id` = ur.`user_id`
+        JOIN
+            role_authorities ra ON ur.`role_id` = ra.`role_id`
+        JOIN
+            authorities a ON ra.`authorities_id` = a.`id`
+        WHERE
+        ui.`id` = 1
     </select>
 </mapper>

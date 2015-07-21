@@ -1,5 +1,7 @@
 package com.myorg.commonapp.core.mapper.ext;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -7,5 +9,5 @@ import java.util.List;
  */
 public interface AuthoritiesResourcesMapperExt {
 
-    public List<String> getResourceByAuthority(int authorityId);
+    public List<String> getResourceByAuthority(@Param(value = "authorityId")int authorityId);
 }
