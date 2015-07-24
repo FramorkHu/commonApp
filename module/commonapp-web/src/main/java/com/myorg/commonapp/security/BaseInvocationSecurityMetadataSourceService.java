@@ -37,8 +37,12 @@ public class BaseInvocationSecurityMetadataSourceService implements FilterInvoca
         //参数是被请求的URL
         String url = ((FilterInvocation)o).getRequestUrl();
 
+        int position = url.indexOf("?");
+        if (-1 != position){
+            url = url.substring(0, position);
+        }
         //url 处理操作
-
+        Collection<ConfigAttribute> attributes = resourceMap.get(url);
         return resourceMap.get(url);
     }
 

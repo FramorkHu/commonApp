@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by huyan on 15/7/19.
+ * 查询出用户所具有的权限等信息并进行封装得到UserDetails
  */
 public class UserDetailSecurityService implements UserDetailsService {
 
