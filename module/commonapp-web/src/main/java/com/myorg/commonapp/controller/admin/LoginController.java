@@ -3,6 +3,9 @@ package com.myorg.commonapp.controller.admin;
 import com.myorg.commonapp.bean.po.UserInfo;
 import com.myorg.commonapp.controller.base.AbstractController;
 import com.myorg.commonapp.service.UserInfoService;
+import com.myorg.commonapp.utils.ParseMD5Utils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,17 +38,20 @@ public class LoginController extends AbstractController {
     public String login(Model model, String userName, String password,
                         HttpServletRequest request){
 
-        UserInfo userInfo =
-                userInfoService.getUserInfo(userName, password);
+        /*UserInfo userInfo =
+                userInfoService.findUserInfo(userName, password);*/
 
-        if (userInfo != null){
-            HttpSession session = request.getSession();
-            session.setAttribute("adminUser", userInfo);
+        try {
+            String encodePassword = ParseMD5Utils.parseStrToMd5L32(password);
+            SecurityUtils.getSubject().login(new UsernamePasswordToken(userName,encodePassword));
+            //HttpSession session = request.getSession();
+            //session.setAttribute("adminUser", userInfo);
             return redirect("admin/index");
-        } else {
+        } catch (Exception e){
             model.addAttribute(ERROR_MSG, "用户名或密码错误，请重新输入");
             return PREFIX+"login";
         }
+
 
     }
 

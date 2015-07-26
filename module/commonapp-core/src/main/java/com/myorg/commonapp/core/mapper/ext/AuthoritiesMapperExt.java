@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface AuthoritiesMapperExt {
 
-    public List<Authorities> getAuthoritiesByUser(int userId);
+    public List<Authorities> findAuthoritiesByUser(int userId);
+
+    public List<Authorities> findAuthoritiesByRoleId(List<Integer> roleIdList);
 }

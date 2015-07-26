@@ -10,7 +10,7 @@
         <result column="is_system" jdbcType="INTEGER" property="isSystem" />
     </resultMap>
 
-    <select id="getAuthoritiesByUser" parameterType="int" resultMap="BaseResultMap">
+    <select id="findAuthoritiesByUser" parameterType="int" resultMap="BaseResultMap">
         SELECT
         a.id, a.authorities_name, a.authorities_desc, a.enabled, a.is_system
         FROM
@@ -22,6 +22,21 @@
         JOIN
             authorities a ON ra.`authorities_id` = a.`id`
         WHERE
-        ui.`id` = 1
+        ui.`id` = #{userId}
+    </select>
+
+    <select id="findAuthoritiesByRoleId" parameterType="int" resultMap="BaseResultMap">
+        SELECT
+            authorities.id, authorities.authorities_name,
+            authorities.authorities_desc, authorities.enabled, authorities.is_system
+        FROM
+            role_authorities
+        JOIN
+            authorities ON role_authorities.authorities_id = authorities.id
+        WHERE
+            role_authorities.role_id IN
+                <foreach close=")" collection="roleIdList" item="listItem" open="(" separator=",">
+                    #{listItem}
+                </foreach>
     </select>
 </mapper>

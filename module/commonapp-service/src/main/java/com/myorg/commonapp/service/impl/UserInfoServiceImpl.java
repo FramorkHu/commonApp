@@ -17,10 +17,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
-    public UserInfo getUserInfo(String userName, String password) {
+    public UserInfo findUserInfo(String userName, String password) {
 
         String encodePassword = ParseMD5Utils.parseStrToMd5L32(password);
 
-        return userInfoDao.getUserInfo(userName, encodePassword);
+        return userInfoDao.findUserInfo(userName, encodePassword);
+    }
+
+    @Override
+    public UserInfo findUserInfoByName(String userName) {
+        return userInfoDao.findUserInfoByName(userName);
     }
 }

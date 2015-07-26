@@ -20,7 +20,7 @@
 
 <div class="container">
 
-    <form class="form-signin" method="post" action="${rc.getContextPath()}/j_spring_security_check">
+    <form class="form-signin" method="post" action="${rc.getContextPath()}/admin/login">
         <h2 class="form-signin-heading">欢迎进入管理后台</h2>
         <label for="inputUserName" class="sr-only">用户名</label>
         <input type="text" name="userName" id="inputUserName" class="form-control" placeholder="用户名" required autofocus>

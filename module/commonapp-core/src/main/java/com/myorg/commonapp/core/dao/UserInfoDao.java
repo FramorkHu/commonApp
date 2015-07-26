@@ -7,7 +7,7 @@ import com.myorg.commonapp.bean.po.UserInfo;
  */
 public interface UserInfoDao {
 
-    public UserInfo getUserInfo(String userName, String password);
+    public UserInfo findUserInfo(String userName, String password);
 
-    public UserInfo getUserInfoByUserName(String userName);
+    public UserInfo findUserInfoByName(String userName);
 }

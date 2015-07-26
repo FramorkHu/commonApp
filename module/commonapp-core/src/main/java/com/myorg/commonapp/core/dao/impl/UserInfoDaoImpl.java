@@ -18,7 +18,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     UserInfoMapper mapper;
 
     @Override
-    public UserInfo getUserInfo(String userName, String password) {
+    public UserInfo findUserInfo(String userName, String password) {
 
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
@@ -35,7 +35,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
 
     @Override
-    public UserInfo getUserInfoByUserName(String userName) {
+    public UserInfo findUserInfoByName(String userName) {
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
 
