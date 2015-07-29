@@ -4,23 +4,22 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!--<classPathEntry
-            location="C:\Users\tuan800\.m2\repository\mysql\mysql-connector-java\5.1.13\mysql-connector-java-5.1.13.jar"/>-->
-
     <classPathEntry
-            location="/Users/huyan/.m2/repository/mysql/mysql-connector-java/5.1.13/mysql-connector-java-5.1.13.jar"/>
+            location="C:\Users\tuan800\.m2\repository\mysql\mysql-connector-java\5.1.13\mysql-connector-java-5.1.13.jar"/>
+
+    <!--<classPathEntry
+            location="/Users/huyan/.m2/repository/mysql/mysql-connector-java/5.1.13/mysql-connector-java-5.1.13.jar"/>-->
 
 
-    <context id="datacenter" targetRuntime="MyBatis3"
-            >
+    <context id="datacenter" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://192.168.100.17:3306/media?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8"
                         userId="root"
-                        password="">
+                        password="123456">
         </jdbcConnection>
 
 
-        <javaModelGenerator targetPackage="com.myorg.commonapp.bean.po"
+        <!--<javaModelGenerator targetPackage="com.myorg.commonapp.bean.po"
                             targetProject="/Users/huyan/StudyBench/commonApp/module/commonapp-core/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -36,11 +35,11 @@
                              targetPackage="com.myorg.commonapp.core.mapper"
                              targetProject="/Users/huyan/StudyBench/commonApp/module/commonapp-core/src/main/java">
             <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>
+        </javaClientGenerator>-->
 
 
 
-        <!--<javaModelGenerator targetPackage="com.myorg.commonapp.bean.po"
+        <javaModelGenerator targetPackage="com.myorg.commonapp.bean.po"
                             targetProject="E:\StudyBench\test\commonApp\module\commonapp-core\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -55,21 +54,18 @@
                              targetPackage="com.myorg.commonapp.core.mapper"
                              targetProject="E:\StudyBench\test\commonApp\module\commonapp-core\src\main\java">
             <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>-->
+        </javaClientGenerator>
 
 
         <!-- 添加需要生成的表，以及生成方式 -->
 
-        <table tableName="authorities" >
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="roles" >
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
         <table tableName="user_info" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="resources" >
+        <table tableName="sys_role" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sys_resource" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

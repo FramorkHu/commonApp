@@ -1,7 +1,6 @@
 package com.myorg.commonapp.service.impl;
 
 import com.myorg.commonapp.bean.po.UserInfo;
-import com.myorg.commonapp.bean.pojo.UserInfoDetail;
 import com.myorg.commonapp.core.dao.UserInfoDao;
 import com.myorg.commonapp.service.UserInfoService;
 import com.myorg.commonapp.utils.ParseMD5Utils;

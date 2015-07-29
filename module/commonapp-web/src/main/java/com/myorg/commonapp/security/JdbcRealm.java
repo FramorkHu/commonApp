@@ -1,13 +1,11 @@
 package com.myorg.commonapp.security;
 
-import com.myorg.commonapp.bean.po.Authorities;
-import com.myorg.commonapp.bean.po.Roles;
+import com.myorg.commonapp.bean.po.SysResource;
+import com.myorg.commonapp.bean.po.SysRole;
 import com.myorg.commonapp.bean.po.UserInfo;
-import com.myorg.commonapp.core.mapper.ext.AuthoritiesMapperExt;
-import com.myorg.commonapp.core.mapper.ext.RolesMapperExt;
+import com.myorg.commonapp.core.mapper.ext.SysResourceMapperExt;
+import com.myorg.commonapp.core.mapper.ext.SysRoleMapperExt;
 import com.myorg.commonapp.service.UserInfoService;
-import com.myorg.commonapp.utils.ListParseUtils;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -30,13 +28,13 @@ public class JdbcRealm extends AuthorizingRealm {
     UserInfoService userInfoService;
 
     @Autowired
-    RolesMapperExt rolesMapperExt;
+    SysRoleMapperExt sysRoleMapperExt;
 
     @Autowired
-    AuthoritiesMapperExt authoritiesMapperExt;
+    SysResourceMapperExt sysResourceMapperExt;
 
     /**
-     * 权限认证
+     * 得到当事人权限
      * @param principalCollection
      * @return
      */
@@ -50,15 +48,13 @@ public class JdbcRealm extends AuthorizingRealm {
         Set<String> permissions = new HashSet<String>();
 
         if ( userInfo!=null ){
-            List<Roles> rolesList =
-                    rolesMapperExt.findRolesByUser(userInfo.getId());
-            List<Integer> roleIdList = new ArrayList<Integer>();
+            List<SysRole> rolesList =
+                    sysRoleMapperExt.findSysRolesByUser(userInfo.getId());
 
-            for (Roles roles : rolesList){
+            for (SysRole roles : rolesList){
                 roleNames.add(roles.getRoleName());
-                roleIdList.add(roles.getId());
             }
-            permissions = getPermissions(roleIdList);
+            permissions = getPermissions(userInfo.getId());
 
         }
         //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
@@ -96,17 +92,14 @@ public class JdbcRealm extends AuthorizingRealm {
         return info;
     }
 
-    public Set<String> getPermissions(List<Integer> roleIdList){
+    public Set<String> getPermissions(Integer userId){
         Set<String> permissions = new LinkedHashSet<String>();
-        if (CollectionUtils.isEmpty(roleIdList)){
-            return permissions;
-        }
 
-        List<Authorities> authoritiesList =
-                authoritiesMapperExt.findAuthoritiesByRoleId(roleIdList);
+        List<SysResource> resourceList =
+                sysResourceMapperExt.findSysResourcesByUserId(userId);
 
-        for (Authorities authorities : authoritiesList){
-            permissions.add(authorities.getAuthoritiesName());
+        for (SysResource resource : resourceList){
+            permissions.add(resource.getResourceUrl());
         }
 
         return permissions;

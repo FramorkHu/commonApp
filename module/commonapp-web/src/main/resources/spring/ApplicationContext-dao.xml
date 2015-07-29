@@ -6,5 +6,4 @@
 
     <bean id="userInfoDao" class="com.myorg.commonapp.core.dao.impl.UserInfoDaoImpl"/>
 
-    <bean id="authoritiesDao" class="com.myorg.commonapp.core.dao.impl.AuthoritiesDaoImpl"/>
 </beans>

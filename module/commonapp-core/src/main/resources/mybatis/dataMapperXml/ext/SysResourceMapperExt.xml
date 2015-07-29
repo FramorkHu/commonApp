@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myorg.commonapp.core.mapper.ext.SysResourceMapperExt" >
+
+    <resultMap id="BaseResultMap" type="com.myorg.commonapp.bean.po.SysResource" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+        <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+        <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+        <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="resource_desc" property="resourceDesc" jdbcType="VARCHAR" />
+        <result column="enable" property="enable" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        res.id, res.resource_name, res.resource_url, res.resource_type, res.priority, res.resource_desc, res.enable
+    </sql>
+
+    <select id="findSysResourcesByUserId" parameterType="int" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            `sys_resource` res
+        JOIN `role_resource` rores
+            ON rores.`resource_id` = res.`id`
+        JOIN `user_role` urol
+            ON urol.`role_id` = rores.`role_id`
+        WHERE urol.`user_id` = #{userId}
+    </select>
+
+    <select id="findSysResourcesByRoleId" parameterType="int" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            `sys_resource` res
+        JOIN `role_resource` rores
+            ON rores.`resource_id` = res.`id`
+        WHERE rores.`role_id`  IN
+            <foreach close=")" collection="roleIdList" item="listItem" open="(" separator=",">
+                #{listItem}
+            </foreach>
+    </select>
+</mapper>
