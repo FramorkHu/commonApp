@@ -3,9 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.0.xsd
-       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -14,7 +16,7 @@
         <property name="cacheManager" ref="cacheManager"/>
    </bean>
 
-   <bean id="jdbcRealm" class="com.myorg.commonapp.security.JdbcRealm"/>
+   <bean id="jdbcRealm" class="com.myorg.commonapp.shiro.realm.JdbcRealm"/>
 
    <!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -33,7 +35,7 @@
         </property>
        <property name="filterChainDefinitions">
            <value>
-               /admin/**=authc
+               /admin/**=user
            </value>
        </property>
    </bean>
@@ -41,4 +43,9 @@
    <bean name="resourceFilter" class="com.myorg.commonapp.security.ResourceFilter"/>
    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+    <aop:config proxy-target-class="true"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>

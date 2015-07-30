@@ -59,12 +59,12 @@
 
         <!-- 添加需要生成的表，以及生成方式 -->
 
-        <table tableName="user_info" >
+        <!--<table tableName="user_info" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
         <table tableName="sys_role" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        </table>-->
         <table tableName="sys_resource" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>

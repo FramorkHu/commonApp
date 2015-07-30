@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
+    <#assign shiro=JspTaglibs["http://shiro.apache.org/tags"] />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,16 +63,16 @@
                         <a href="#"><i class="fa fa-user  fa-fw"></i> 权限管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Flot Charts</a>
+                                <a onclick="addTab('user/viewUsers',$(this))">用户管理</a>
                             </li>
                             <li>
-                                <a href="morris.html">Morris.js Charts</a>
+                                <a onclick="addTab('user/viewUsers',$(this))">角色管理</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="login"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <a onclick="addTab('user/viewUsers',$(this))"><i class="fa fa-table fa-fw"></i> Tables</a>
                     </li>
 
                     <li>
@@ -143,6 +142,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/resources/bower_components/admin/sb-admin-2.js"></script>
+
+<script src="/resources/js/tab.js"></script>
 
 </body>
 

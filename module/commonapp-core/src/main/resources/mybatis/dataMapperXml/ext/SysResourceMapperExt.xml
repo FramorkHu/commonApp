@@ -2,18 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.myorg.commonapp.core.mapper.ext.SysResourceMapperExt" >
 
-    <resultMap id="BaseResultMap" type="com.myorg.commonapp.bean.po.SysResource" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
-        <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
-        <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
-        <result column="priority" property="priority" jdbcType="INTEGER" />
-        <result column="resource_desc" property="resourceDesc" jdbcType="VARCHAR" />
-        <result column="enable" property="enable" jdbcType="INTEGER" />
+    <resultMap id="BaseResultMap" type="com.myorg.commonapp.bean.po.SysResource">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+        <result column="resource_permission" jdbcType="VARCHAR" property="resourcePermission" />
+        <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
+        <result column="priority" jdbcType="INTEGER" property="priority" />
+        <result column="resource_desc" jdbcType="VARCHAR" property="resourceDesc" />
+        <result column="enable" jdbcType="INTEGER" property="enable" />
     </resultMap>
 
-    <sql id="Base_Column_List" >
-        res.id, res.resource_name, res.resource_url, res.resource_type, res.priority, res.resource_desc, res.enable
+    <sql id="Base_Column_List">
+        res.id, res.parent_id, res.resource_name, res.resource_permission, res.resource_url,
+        res.priority, res.resource_desc,res.enable
     </sql>
 
     <select id="findSysResourcesByUserId" parameterType="int" resultMap="BaseResultMap">

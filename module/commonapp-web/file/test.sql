@@ -37,18 +37,19 @@ DROP TABLE IF EXISTS `sys_resource`;
 
 CREATE TABLE `sys_resource` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(128) DEFAULT NULL COMMENT '父id',
   `resource_name` varchar(128) DEFAULT NULL COMMENT '资源名称',
+  `resource_permission` varchar(128) DEFAULT NULL COMMENT '资源权限',
   `resource_url` varchar(128) DEFAULT NULL COMMENT '资源地址',
-  `resource_type` varchar(128) DEFAULT NULL COMMENT '资源类型（1:url,2:操作）',
   `priority` int(11) DEFAULT NULL COMMENT '资源优先级',
   `resource_desc` varchar(128) DEFAULT NULL COMMENT '资源描述',
   `enable` int(11) DEFAULT NULL COMMENT '0:禁用；1:启用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_resource` */
 
-insert  into `sys_resource`(`id`,`resource_name`,`resource_url`,`resource_type`,`priority`,`resource_desc`,`enable`) values (1,'index','/admin/login','url',1,'index',1);
+insert  into `sys_resource`(`id`,`parent_id`,`resource_name`,`resource_permission`,`resource_url`,`priority`,`resource_desc`,`enable`) values (1,NULL,'index',NULL,'/admin/login',1,'添加用户',1),(2,NULL,NULL,NULL,'/admin/user',2,'添加用户',1);
 
 /*Table structure for table `sys_role` */
 

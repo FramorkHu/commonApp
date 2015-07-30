@@ -1,4 +1,4 @@
-package com.myorg.commonapp.security;
+package com.myorg.commonapp.shiro.realm;
 
 import com.myorg.commonapp.bean.po.SysResource;
 import com.myorg.commonapp.bean.po.SysRole;
@@ -99,7 +99,7 @@ public class JdbcRealm extends AuthorizingRealm {
                 sysResourceMapperExt.findSysResourcesByUserId(userId);
 
         for (SysResource resource : resourceList){
-            permissions.add(resource.getResourceUrl());
+            permissions.add(resource.getResourcePermission());
         }
 
         return permissions;

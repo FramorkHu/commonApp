@@ -33,14 +33,12 @@ public class LoginController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
-    private static final String PREFIX = "admin/";
-
     @Autowired
     private UserInfoService userInfoService;
 
     @RequestMapping(value = {"/login", "relogin"}, method = GET)
     public String loginPage(){
-        return PREFIX + "login";
+        return ADMIN_PREFIX + "login";
     }
 
     @RequestMapping(value = {"/login", "relogin"}, method = POST)
@@ -60,15 +58,15 @@ public class LoginController extends AbstractController {
         } catch (UnknownAccountException e){
             LOGGER.error("username wasn't in the system,",e);
             model.addAttribute(ERROR_MSG, "用户名或密码错误，请重新输入");
-            return PREFIX+"login";
+            return ADMIN_PREFIX+"login";
         } catch (IncorrectCredentialsException e){
             LOGGER.error("password didn't match,",e);
             model.addAttribute(ERROR_MSG, "用户名或密码错误，请重新输入");
-            return PREFIX+"login";
+            return ADMIN_PREFIX+"login";
         } catch (Exception e){
             LOGGER.error("login is error,",e);
             model.addAttribute(ERROR_MSG, "系统错误，请联系管理员");
-            return PREFIX+"login";
+            return ADMIN_PREFIX+"login";
         }
 
 

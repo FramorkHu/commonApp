@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AbstractController {
 
     public static JsonUtil jsonUtil = JsonUtil.buildNonDefaultBinder();
-
+    public static final String ADMIN_PREFIX = "admin/";
     public static final String LIST_PAGE = "list_page";
     public static final String LIST = "list";
     public static final String ADD = "add";
