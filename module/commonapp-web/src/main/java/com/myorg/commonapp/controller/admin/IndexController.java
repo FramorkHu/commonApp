@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class IndexController extends AbstractController {
 
-    @Autowired
-
 
     @RequestMapping("/index")
     public String indexPage(){

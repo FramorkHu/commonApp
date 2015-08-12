@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>后台管理</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">

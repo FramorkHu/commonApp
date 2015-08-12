@@ -6,6 +6,7 @@
        http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
    <!-- 配置数据源-->
+
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="#{jdbcProps['datasource.driverClassName']}"/>
         <property name="jdbcUrl" value="#{jdbcProps['datasource.url']}"/>
