@@ -47,4 +47,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
         }
         return userInfos.get(0);
     }
+
+    @Override
+    public int saveUserInfo(UserInfo userInfo) throws Exception{
+        mapper.insert(userInfo);
+        throw new Exception("test Exception");
+
+    }
 }

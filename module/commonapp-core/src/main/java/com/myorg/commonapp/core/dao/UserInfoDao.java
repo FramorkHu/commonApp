@@ -10,4 +10,6 @@ public interface UserInfoDao {
     public UserInfo findUserInfo(String userName, String password);
 
     public UserInfo findUserInfoByName(String userName);
+
+    public int saveUserInfo(UserInfo userInfo) throws Exception;
 }

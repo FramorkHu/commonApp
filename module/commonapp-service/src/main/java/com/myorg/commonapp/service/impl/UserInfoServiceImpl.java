@@ -27,4 +27,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo findUserInfoByName(String userName) {
         return userInfoDao.findUserInfoByName(userName);
     }
+
+    @Override
+    public int saveUserInfo(UserInfo userInfo) {
+        try {
+            return userInfoDao.saveUserInfo(userInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

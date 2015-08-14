@@ -4,6 +4,8 @@ import com.myorg.commonapp.bean.po.SysResource;
 import com.myorg.commonapp.bean.po.UserInfo;
 import com.myorg.commonapp.core.dao.UserInfoDao;
 import com.myorg.commonapp.core.dao.impl.UserInfoDaoImpl;
+import com.myorg.commonapp.service.UserInfoService;
+import com.myorg.commonapp.service.impl.UserInfoServiceImpl;
 import org.apache.ibatis.binding.MapperProxy;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -56,5 +58,16 @@ public class MybatisTest {
         //MapperProxy
 
         System.out.println(userInfo.getUserName());
+    }
+
+    @Test
+    public void testSave(){
+        UserInfoService userInfoService = (UserInfoServiceImpl) context.getBean("userInfoService");
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName("test");
+        userInfo.setPassword("test");
+
+        userInfoService.saveUserInfo(userInfo);
     }
 }
