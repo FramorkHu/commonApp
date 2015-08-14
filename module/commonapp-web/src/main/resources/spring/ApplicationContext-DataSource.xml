@@ -50,7 +50,7 @@
         <aop:pointcut id="daoPointCut" expression="execution(* com.myorg.commonapp.core.dao..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut"/>
     </aop:config>
-    
+
     <!--使用mybatis-->
     <!-- 配置sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
