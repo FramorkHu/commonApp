@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by huyan on 2015/7/1.
@@ -39,6 +40,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
 
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         criteria.andUserNameEqualTo(userName);
         List<UserInfo> userInfos =
                 mapper.selectByExample(example);
@@ -50,8 +56,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
     @Override
     public int saveUserInfo(UserInfo userInfo) throws Exception{
-        mapper.insert(userInfo);
-        throw new Exception("test Exception");
+        return mapper.insert(userInfo);
+        //throw new Exception("test Exception");
 
     }
 }
