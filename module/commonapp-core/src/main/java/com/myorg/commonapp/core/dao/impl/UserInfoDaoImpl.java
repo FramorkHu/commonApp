@@ -39,12 +39,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public UserInfo findUserInfoByName(String userName) {
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
-
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         criteria.andUserNameEqualTo(userName);
         List<UserInfo> userInfos =
                 mapper.selectByExample(example);
@@ -57,7 +51,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public int saveUserInfo(UserInfo userInfo) throws Exception{
         return mapper.insert(userInfo);
-        //throw new Exception("test Exception");
 
     }
 }
