@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,6 +37,13 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
 
     @Override
+    public List<UserInfo> findUserInfos(Map<String, Object> parm) {
+        UserInfoExample example = new UserInfoExample();
+        parseCriteria(parm,example);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
     public UserInfo findUserInfoByName(String userName) {
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
@@ -49,8 +57,28 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
 
     @Override
-    public int saveUserInfo(UserInfo userInfo) throws Exception{
+    public int saveUserInfo(UserInfo userInfo){
         return mapper.insert(userInfo);
+
+    }
+
+    @Override
+    public int delUserInfo(int id) {
+        return mapper.deleteByPrimaryKey(id);
+    }
+
+
+    private void parseCriteria(Map<String, Object> parm,
+                               UserInfoExample example){
+
+        UserInfoExample.Criteria criteria = example.createCriteria();
+
+        if (parm.get("userName")!=null){
+            criteria.andUserNameEqualTo(String.valueOf(parm.get("userName")));
+        }
+        if (parm.get("password")!=null){
+            criteria.andPasswordEqualTo(String.valueOf(parm.get("password")));
+        }
 
     }
 }

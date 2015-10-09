@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.FactoryBean;
 
 /**
  * Created by huyan on 2015/8/20.
@@ -25,8 +26,6 @@ public class SwitchDataSource {
         ComboPooledDataSource dataSource = (ComboPooledDataSource)BEAN_FACTORY.getBean("dataSource");
         ComboPooledDataSource masterDataSource = (ComboPooledDataSource)BEAN_FACTORY.getBean("dataSource");
         ComboPooledDataSource slaveDataSource = (ComboPooledDataSource)BEAN_FACTORY.getBean("slaveDataSource");
-
-
 
         BeanUtils.copyProperties(dataSource,slaveDataSource);
 

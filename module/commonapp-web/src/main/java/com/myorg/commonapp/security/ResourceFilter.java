@@ -28,6 +28,7 @@ public class ResourceFilter extends AccessControlFilter {
 
         String path = getPathWithinApplication(servletRequest);
 
+
         return false;
     }
 

@@ -2,14 +2,17 @@ package com.myorg.commonapp.controller.admin;
 
 import com.myorg.commonapp.bean.po.UserInfo;
 import com.myorg.commonapp.controller.base.AbstractController;
+import com.myorg.commonapp.controller.base.OperateStateConstant;
 import com.myorg.commonapp.service.UserInfoService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +28,8 @@ public class UserInfoController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoController.class);
 
+    @Autowired
+    private UserInfoService userInfoService;
 
     @RequiresPermissions("user:viewUsers")
     @RequestMapping("/viewUsers")
@@ -41,9 +46,21 @@ public class UserInfoController extends AbstractController {
     }
 
     @RequestMapping("/addUser")
-    public String addUser(Model model){
-        System.out.println("addUser ok");
-        model.addAttribute("addUser","test");
+    public String addUser(Model model,UserInfo userInfo){
+
+        if (checkIsUser(userInfo)
+                && userInfoService.findUserInfoByName(userInfo.getUserName()) != null){
+            model.addAttribute(TIP, OperateStateConstant.SAME_USER_ERROR);
+        }
+
+        int result =
+                userInfoService.saveUserInfo(userInfo);
+        if (result>0){
+            model.addAttribute(TIP, OperateStateConstant.ADD_SUCCESS);
+        } else {
+            model.addAttribute(TIP, OperateStateConstant.ADD_ERROR);
+        }
+
         return ADMIN_PREFIX+"sysUserPage";
     }
 
@@ -56,7 +73,8 @@ public class UserInfoController extends AbstractController {
     }
 
     @RequestMapping("/findUser")
-    public void findUser(HttpServletResponse response, String value){
+    public void findUser(HttpServletRequest request,
+                         HttpServletResponse response, String value){
 
         List<UserInfo> userInfos = new ArrayList<UserInfo>();
 
@@ -78,10 +96,18 @@ public class UserInfoController extends AbstractController {
         userInfos.add(userInfo2);
 
         Map<String, Object> result = new HashMap<String, Object>();
+        result.put("draw",1);
         result.put("recordsTotal",2);
+        result.put("recordsFiltered",2);
         result.put("data",userInfos);
 
 
         writeJson(response, result);
+    }
+
+    private boolean checkIsUser(UserInfo userInfo){
+
+        return userInfo.getUserName()!=null &&
+                userInfo.getPassword() != null;
     }
 }

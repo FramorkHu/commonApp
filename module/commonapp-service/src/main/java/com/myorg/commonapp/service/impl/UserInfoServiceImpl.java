@@ -8,7 +8,9 @@ import com.myorg.commonapp.service.UserInfoService;
 import com.myorg.commonapp.utils.ParseMD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by huyan on 15/7/16.
@@ -18,16 +20,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private UserInfoDao userInfoDao;
 
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-
-    @Override
-    public UserInfo findUserInfo(String userName, String password) {
-
-        String encodePassword = ParseMD5Utils.parseStrToMd5L32(password);
-
-        return userInfoDao.findUserInfo(userName, encodePassword);
-    }
 
     @Override
     public UserInfo findUserInfoByName(String userName) {
@@ -35,19 +27,23 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<UserInfo> findAllUserInfo() {
-        UserInfoExample.Criteria criteria = new UserInfoExample().createCriteria();
-
-        return null;
+    public List<UserInfo> findUserInfos(Map<String, Object> parm) {
+        List<UserInfo> userInfos = new ArrayList<UserInfo>();
+        userInfos.addAll(userInfoDao.findUserInfos(parm));
+        return userInfos;
     }
 
     @Override
     public int saveUserInfo(UserInfo userInfo) {
-        try {
-            return userInfoDao.saveUserInfo(userInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
+
+        return userInfoDao.saveUserInfo(userInfo);
+
     }
+
+    @Override
+    public int delUserInfo(int id) {
+
+        return userInfoDao.delUserInfo(id);
+    }
+
 }
