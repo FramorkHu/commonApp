@@ -1,6 +1,7 @@
 package com.myorg.commonapp.security;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
@@ -13,6 +14,12 @@ import java.util.List;
  */
 public class ResourceFilter extends AccessControlFilter {
 
+
+    //忽略指定url
+    private List<String> ignoreList;
+
+    //忽略指定前缀
+    private List<String> ignoreHeadList;
 
     /**
      * 判断请求是否通过
@@ -28,8 +35,26 @@ public class ResourceFilter extends AccessControlFilter {
 
         String path = getPathWithinApplication(servletRequest);
 
+        if (ignoreHeadList != null) {
+            for (String s : ignoreHeadList) {
+                if (path.startsWith(s)) {
+                    return true;
+                }
+            }
+        }
 
-        return false;
+        if (ignoreList != null && ignoreList.contains(path)) {
+            return true;
+        }
+
+        Subject subject = getSubject(servletRequest, servletResponse);
+
+        String permit = path.substring(1).replace("/",":");
+
+        boolean isAllow = subject.isPermitted(permit);
+
+        return isAllow;
+
     }
 
     /**
@@ -53,9 +78,7 @@ public class ResourceFilter extends AccessControlFilter {
         return true;
     }
 
-
-    protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException{
-
+    public void setIgnoreList(List<String> ignoreList) {
+        this.ignoreList = ignoreList;
     }
-
 }
