@@ -9,41 +9,36 @@
     <a href="addUser">用户新增</a><br/>
 </@shiro.hasPermission>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                DataTables Advanced Tables
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                        <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
 
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <thead>
+    <tr>
+        <th>Rendering engine</th>
+        <th>Browser</th>
+        <th>Platform(s)</th>
+        <th>Engine version</th>
+        <th>CSS grade</th>
+    </tr>
+    </thead>
+</table>
+
 <script>
 $(document).ready(function() {
     $('#dataTables-example').DataTable({
         "processing": true,
         "serverSide": true,
+        "searching": false,
+        "language": {
+                "lengthMenu": "_MENU_ 条记录每页",
+                "zeroRecords": "没有找到记录",
+                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "paginate": {
+                    "previous": "上一页",
+                    "next": "下一页"
+                }
+            },
         "ajax":{
             "url":"/admin/user/findUser",
             "data":function(d){
@@ -59,4 +54,8 @@ $(document).ready(function() {
         ]
     });
 });
+function initComplete(data){
+    $('#mytoolbox').append('asadwadwa');
+}
+
 </script>

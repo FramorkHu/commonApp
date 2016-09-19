@@ -2,6 +2,7 @@ package test.myorg.commonapp.mybatise;
 
 import com.myorg.commonapp.bean.po.SysResource;
 import com.myorg.commonapp.bean.po.UserInfo;
+import com.myorg.commonapp.controller.MainController;
 import com.myorg.commonapp.core.dao.UserInfoDao;
 import com.myorg.commonapp.core.dao.impl.UserInfoDaoImpl;
 import com.myorg.commonapp.mybatis.datasource.ServiceLocator;
@@ -23,7 +24,10 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.config.TxNamespaceHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +44,14 @@ public class MybatisTest {
     @Before
     public void init(){
         context = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
+    }
+
+    @Test
+    public void test(){
+        //SysResource sysResource;
+        while (true){
+            SysResource sysResource = new SysResource();
+        }
     }
 
     @Test
@@ -125,5 +137,20 @@ public class MybatisTest {
                 session.selectList("com.myorg.commonapp.core.mapper.ext.SysResourceMapperExt.findSysResourcesByUserId", params);
 
         System.out.println(sysResources1.size());
+    }
+
+    @Test
+    public void testAnnotation(){
+        Class controllerClass =MainController.class;
+        Method[] methods = controllerClass.getDeclaredMethods();
+        for (Method method : methods){
+
+            Annotation annotation = method.getAnnotation(RequestMapping.class);
+            Class annocationClass = annotation.annotationType();
+            Annotation[] annotations = annocationClass.getAnnotations();
+            int a = annotations.length;
+
+
+        }
     }
 }
