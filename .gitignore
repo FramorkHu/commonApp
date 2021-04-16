@@ -1,1 +1,5 @@
 .idea/
+common-app.iml
+module/commonapp-service/commonapp-service.iml
+module/commonapp-util/commonapp-util.iml
+module/commonapp-web/commonapp-web.iml
